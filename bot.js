@@ -19,13 +19,13 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-const cronFiles = fs.readdirSync('./cronjobs').filter(file => file.endsWith('.js'));
-for (const file of cronFiles) {
-  const job = require(`./cronjobs/${file}`);
-  // set a new item in the Collection
-  // with the key as the job name and the value as the exported module
-  client.cronjobs.set(job.name, job);
-}
+// const cronFiles = fs.readdirSync('./cronjobs').filter(file => file.endsWith('.js'));
+// for (const file of cronFiles) {
+//   const job = require(`./cronjobs/${file}`);
+//   // set a new item in the Collection
+//   // with the key as the job name and the value as the exported module
+//   client.cronjobs.set(job.name, job);
+// }
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
