@@ -43,7 +43,7 @@ module.exports = {
               .setThumbnail(metadata.image_url);
 
             metadata.traits.forEach(function(trait){
-	      if(trait.trait_type.toLower() != "birthday")    
+	      if(trait.trait_type.toLowerCase() != "birthday")    
                  embedMsg.addField(trait.trait_type, `${trait.value} (${Number(trait.trait_count/metadata.collection.stats.count).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})})`, true)
               //embedMsg.addField(trait.trait_type, `${trait.value}`, true)
             });
