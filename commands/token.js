@@ -37,21 +37,26 @@ module.exports = {
         .then((metadata) => {
             const embedMsg = new Discord.MessageEmbed()
               .setColor('#0099ff')
-	      .setAuthor(`${metadata.owner.user?.username || metadata.owner.address.slice(0,8)} bought`)
               .setTitle(metadata.name)
               .setURL(metadata.permalink)
               .setThumbnail(metadata.image_url);
 	    	    
 	    if(metadata.last_sale)
-	    	embedMsg.addField("Last sold for", `${metadata.last_sale.total_price/(1e18)}\u039E`);
-
+	    	embedMsg.addField("Last Sold For", `${metadata.last_sale.total_price/(1e18)} \u039E`);
+	    
+	    embedMsg.addField("Owner", `[${metadata.owner.user?.username || metadata.owner.address.slice(0,8)}](https://opensea.io/${metadata.owner.address})`, true);
+	    embedMsg.addField("Rarity", `[Rarity.tools](https://rarity.tools/pixls-official/view/${args[0]}) | [PixlTools](https://pixls.nft-tools.xyz/pixl/${args[0]})`, true);
+	    
+	    embedMsg.addField("", "_________________________________");
+	    let first = false;
             metadata.traits.forEach(function(trait){
-	      if(trait.trait_type.toLowerCase() != "birthday")    
-                 embedMsg.addField(trait.trait_type, `${trait.value} (${Number(trait.trait_count/metadata.collection.stats.count).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})})`, true)
+	      if(trait.trait_type.toLowerCase() != "birthday") {
+                 embedMsg.addField(trait.trait_type, `${trait.value} (${Number(trait.trait_count/metadata.collection.stats.count).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})})`, first)
+		      
+	     	 first = true;
+	      }	    
             });
 	    
-	    embedMsg.addField("Rarity", `[Rarity.tools](https://rarity.tools/pixls-official/view/${args[0]}) | [PixlTools](https://pixls.nft-tools.xyz/pixl/${args[0]})`, true);
-
             message.channel.send(embedMsg);
         })
         .catch(error => message.channel.send(error.message));
