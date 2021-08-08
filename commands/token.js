@@ -47,6 +47,9 @@ module.exports = {
                  embedMsg.addField(trait.trait_type, `${trait.value} (${Number(trait.trait_count/metadata.collection.stats.count).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})})`, true)
               //embedMsg.addField(trait.trait_type, `${trait.value}`, true)
             });
+	    
+	    embedMsg.addField("Rarity.tools »", `https://rarity.tools/pixls-official/view/${args[0]}`);
+	    embedMsg.addField("PixlTools »", `https://pixls.nft-tools.xyz/pixl/${args[0]}`);
 
             message.channel.send(embedMsg);
         })
