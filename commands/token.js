@@ -47,7 +47,6 @@ module.exports = {
 	    embedMsg.addField("Owner", `[${metadata.owner.user?.username || metadata.owner.address.slice(0,8)}](https://opensea.io/${metadata.owner.address})`, true);
 	    embedMsg.addField("Rarity", `[Rarity.tools](https://rarity.tools/pixls-official/view/${args[0]}) | [PixlTools](https://pixls.nft-tools.xyz/pixl/${args[0]})`, true);
 	    
-	    embedMsg.addField(" ", "_________________________________");
 	    let first = false;
             metadata.traits.forEach(function(trait){
 	      if(trait.trait_type.toLowerCase() != "birthday") {
