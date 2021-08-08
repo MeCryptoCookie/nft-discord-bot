@@ -48,8 +48,7 @@ module.exports = {
               //embedMsg.addField(trait.trait_type, `${trait.value}`, true)
             });
 	    
-	    embedMsg.addField("Rarity.tools »", `https://rarity.tools/pixls-official/view/${args[0]}`);
-	    embedMsg.addField("PixlTools »", `https://pixls.nft-tools.xyz/pixl/${args[0]}`);
+	    embedMsg.addField("Rarity", `[Rarity.tools](https://rarity.tools/pixls-official/view/${args[0]}) | [PixlTools](https://pixls.nft-tools.xyz/pixl/${args[0]})`, true);
 
             message.channel.send(embedMsg);
         })
