@@ -37,15 +37,17 @@ module.exports = {
         .then((metadata) => {
             const embedMsg = new Discord.MessageEmbed()
               .setColor('#0099ff')
+	      .setAuthor(`${metadata.owner.user?.username || metadata.owner.address.slice(0,8)} bought`)
               .setTitle(metadata.name)
               .setURL(metadata.permalink)
-              .addField("Owner", metadata.owner.user?.username || metadata.owner.address.slice(0,8))
               .setThumbnail(metadata.image_url);
+	    	    
+	    if(metadata.last_sale)
+	    	embedMsg.addField("Last sold for", `${metadata.last_sale.total_price/(1e18)}\u039E`);
 
             metadata.traits.forEach(function(trait){
 	      if(trait.trait_type.toLowerCase() != "birthday")    
                  embedMsg.addField(trait.trait_type, `${trait.value} (${Number(trait.trait_count/metadata.collection.stats.count).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})})`, true)
-              //embedMsg.addField(trait.trait_type, `${trait.value}`, true)
             });
 	    
 	    embedMsg.addField("Rarity", `[Rarity.tools](https://rarity.tools/pixls-official/view/${args[0]}) | [PixlTools](https://pixls.nft-tools.xyz/pixl/${args[0]})`, true);
