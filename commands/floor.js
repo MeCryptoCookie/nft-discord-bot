@@ -5,7 +5,7 @@ const CacheService = require('../cache')
 
 const { JSDOM } = jsdom;
 
-const ttl = 60; //cache for 60 seconds;
+const ttl = 3600; //cache for 3600 seconds;
 const cache = new CacheService(ttl);
 
 const sleep = async (delay) => await new Promise(r => setTimeout(r, delay))
