@@ -16,7 +16,9 @@ const openseaUrl = `https://opensea.io/assets/${process.env.OPEN_SEA_COLLECTION_
 const getOS = async url => {
   const OS_INTERVAL = 500
   await sleep(OS_INTERVAL)
-  const res = await axios.get(url)
+  const res = await axios.get(url, {
+    "headers": { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"},
+  });
   return res.data
 }
 
