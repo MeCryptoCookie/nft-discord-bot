@@ -39,8 +39,6 @@ function processData(metadata)
 {
     floorPrice = 0;
 
-    console.log(metadata);
-
     metadata.every(function(element, index) {
         element.primary_asset_contracts.every(function(contract, index2) {
             if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
