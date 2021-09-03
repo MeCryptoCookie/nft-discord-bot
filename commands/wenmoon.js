@@ -8,8 +8,13 @@ module.exports = {
 	execute(message, args) {
 
   // Otherwise, current date will be used:
-  const phase = Moon.lunarPhase;
-  const emoji = Moon.lunarPhaseEmoji;
+  const phase = Moon.lunarPhase();
+  const age = Moon.lunarAge();
+  const emoji = Moon.lunarPhaseEmoji();
+
+  console.log(phase);
+  console.log(age);
+  console.log(emoji);
   
   const embedMsg = new Discord.MessageEmbed()
   .setTitle(`${emoji} Tonight's a ${phase} ${emoji}`);
