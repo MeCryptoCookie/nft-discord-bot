@@ -14,6 +14,6 @@ module.exports = {
     const client = new Discord.Client();
     client.login(process.env.DISCORD_BOT_TOKEN);
 
-    let c = client.channels.fetch(parseInt(args[0]).toString());
+    let c = client.channels.cache.get(parseInt(args[0]).toString());
     c.send(args.slice(1).join(' '));
 }};
