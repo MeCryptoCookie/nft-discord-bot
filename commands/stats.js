@@ -65,14 +65,17 @@ function processData(message, metadata)
     else 
     {
       const embedMsg = new Discord.MessageEmbed()
-            .setTitle(`Current Pixls Statistics`);
+            .setTitle(`📊 Current Pixls Statistics 📊`);
 
       embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
-      embedMsg.addField("Total Sales", `${stats.total_sales.toFixed(2)}Ξ`, true);
+      embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
       embedMsg.addField("# Owners", `${stats.num_owners}`, true);
       embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
       embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
       embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
+      embedMsg.addField("1D VOL", `${stats.one_day_volume.toFixed(2)}Ξ`, true);
+      embedMsg.addField("7D VOL", `${stats.seven_day_volume.toFixed(2)}Ξ`, true);
+      embedMsg.addField("30D VOL", `${stats.thirty_day_volume.toFixed(2)}Ξ`, true);
 
       message.channel.send(embedMsg);
     }

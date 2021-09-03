@@ -7,7 +7,7 @@ module.exports = {
 	name: process.env.DISCORD_FLOOR_COMMAND || "wenmoon",
 	execute(message, args) {
 
-  const start = Date.now();
+  const start = new Date();
   moonType = getMoonPhase(start.getYear(), start.getMonth(), start.getDay());  
 
   const embedMsg = new Discord.MessageEmbed()
@@ -63,7 +63,7 @@ function getMoonPhase(year, month, day)
       case 7:
         return 'Waning Crescent Moon';
     }
-    
+
     // 0 => New Moon
     // 1 => Waxing Crescent Moon
     // 2 => Quarter Moon
