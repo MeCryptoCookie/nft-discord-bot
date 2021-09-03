@@ -42,7 +42,6 @@ function processData(message, metadata)
         element.primary_asset_contracts.every(function(contract, index2) {
             if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
             {
-                console.log(element);
                 stats = element.stats;
                 return false;
             }
@@ -62,18 +61,19 @@ function processData(message, metadata)
       .setTitle(`Stats couldn't be gathered. Sorry!`);
 
       message.channel.send(embedMsg);
-      return;
     }
+    else 
+    {
+      const embedMsg = new Discord.MessageEmbed()
+            .setTitle(`Current Pixls Statistics`);
 
-    const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`Current Pixls Statistics`);
+      embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
+      embedMsg.addField("Total Sales", `${stats.total_sales.toFixed(2)}Ξ`, true);
+      embedMsg.addField("# Owners", `${stats.num_owners}`, true);
+      embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
+      embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
+      embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
 
-    embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
-    embedMsg.addField("Total Sales", `${stats.total_sales.toFixed(2)}Ξ`, true);
-    embedMsg.addField("# Owners", `${stats.num_owners}`, true);
-    embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
-    embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
-    embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
-
-    message.channel.send(embedMsg);
+      message.channel.send(embedMsg);
+    }
 }
