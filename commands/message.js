@@ -11,5 +11,7 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    message.channel.send(args.slice(1).join(' '));
+    let c = message.guild.channels.find(ch => ch.name === 'collabland-config');
+    c.send(args.slice(1).join(' '));
+    //message.channel.send(args.slice(1).join(' '));
 }};
