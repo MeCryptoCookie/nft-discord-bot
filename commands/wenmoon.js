@@ -8,6 +8,7 @@ module.exports = {
 	execute(message, args) {
 
   const start = new Date();
+  console.log(start);
   moonType = getMoonPhase(start.getYear().toString(), start.getMonth().toString(), start.getDay().toString());  
 
   const embedMsg = new Discord.MessageEmbed()
