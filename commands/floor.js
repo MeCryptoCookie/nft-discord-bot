@@ -28,7 +28,7 @@ module.exports = {
           return res.json();
         })
         .then((metadata) => {
-            message.channel.send(metadata);
+            // message.channel.send(metadata);
             processData(metadata);
         })
         .catch(error => message.channel.send(error.message));
@@ -45,7 +45,7 @@ function processData(metadata)
         element.primary_asset_contracts.every(function(contract, index2) {
             if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
             {
-                floorPrice = x.floor_price;
+                floorPrice = element.stats.floor_price;
                 return false;
             }
 
