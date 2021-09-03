@@ -28,7 +28,7 @@ module.exports = {
           return res.json();
         })
         .then((metadata) => {
-            message.channel.send(error.message);
+            message.channel.send(metadata);
             processData(metadata);
         })
         .catch(error => message.channel.send(error.message));
