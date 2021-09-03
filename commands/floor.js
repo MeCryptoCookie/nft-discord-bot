@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { openseaMetadataUrl } = require('../config.json');
+const { openseaCollectionsUrl } = require('../config.json');
 
 const Discord = require('discord.js');
 
