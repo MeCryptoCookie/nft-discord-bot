@@ -8,7 +8,7 @@ module.exports = {
 	execute(message, args) {
 
   const start = new Date();
-  moonType = getMoonPhase(start.getYear(), start.getMonth(), start.getDay());  
+  moonType = getMoonPhase(start.getYear().toString(), start.getMonth().toString(), start.getDay().toString());  
 
   const embedMsg = new Discord.MessageEmbed()
   .setTitle(`Tonight's a ${moonType}`);
