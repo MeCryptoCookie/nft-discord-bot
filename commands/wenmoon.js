@@ -3,7 +3,7 @@ const { openseaCollectionsUrl } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: process.env.DISCORD_FLOOR_COMMAND || "wenmoon",
+	name: process.env.DISCORD_WENMOON_COMMAND || "wenmoon",
 	execute(message, args) {
 
   // Otherwise, current date will be used:
