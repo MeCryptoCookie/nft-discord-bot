@@ -36,17 +36,22 @@ function processData(metadata)
 {
     floorPrice = 0;
 
-    foreach(x in metadata)
-    {
-        foreach(y in x.primary_asset_contracts)
-        {
-            if(y.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
+    metadata.every(function(element, index) {
+        element.primary_asset_contracts.every(function(contract, index2) {
+            if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
             {
                 floorPrice = x.floor_price;
-                break;
+                return false;
             }
-        }
-    }
+
+            return true;
+        })
+
+        if(floorPrice > 0)
+            return false;
+        else
+            return true;
+    });
 
     const embedMsg = new Discord.MessageEmbed()
           .setTitle(`The current floor price is ${floorPrice.trimEnd()}Ξ`)
