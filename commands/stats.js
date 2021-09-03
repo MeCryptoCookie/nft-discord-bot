@@ -4,7 +4,7 @@ const { openseaCollectionsUrl } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: process.env.DISCORD_FLOOR_COMMAND || "stats",
+	name: process.env.DISCORD_STATS_COMMAND || "stats",
 	execute(message, args) {
 
     let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;

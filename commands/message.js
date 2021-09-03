@@ -11,5 +11,5 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    message.channel.send(args[1]);
+    message.channel.send(args.slice(1).join(' '));
 }};
