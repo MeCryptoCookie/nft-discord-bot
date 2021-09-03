@@ -29,13 +29,13 @@ module.exports = {
         })
         .then((metadata) => {
             // message.channel.send(metadata);
-            processData(metadata);
+            processData(message, metadata);
         })
         .catch(error => message.channel.send(error.message));
 	},
 };
 
-function processData(metadata)
+function processData(message, metadata)
 {
     floorPrice = 0;
 

@@ -28,14 +28,13 @@ module.exports = {
           return res.json();
         })
         .then((metadata) => {
-            // message.channel.send(metadata);
-            processData(metadata);
+            processData(message, metadata);
         })
         .catch(error => message.channel.send(error.message));
 	},
 };
 
-function processData(metadata)
+function processData(message, metadata)
 {
     stats = null;
 
@@ -66,7 +65,14 @@ function processData(metadata)
     }
 
     const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`The current floor price is ${floorPrice}Ξ`)
+          .setTitle(`Current Pixls Statistics`);
+
+    embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("Total Sales", `${stats.total_sales.toFixed(2)}Ξ`, true);
+    embedMsg.addField("# Owners", `${stats.num_owners}`, true);
+    embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
 
     message.channel.send(embedMsg);
 }
