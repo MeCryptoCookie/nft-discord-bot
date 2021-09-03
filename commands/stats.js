@@ -4,7 +4,7 @@ const { openseaCollectionsUrl } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: process.env.DISCORD_FLOOR_COMMAND || "floor",
+	name: process.env.DISCORD_FLOOR_COMMAND || "stats",
 	execute(message, args) {
 
     let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;
@@ -37,13 +37,13 @@ module.exports = {
 
 function processData(metadata)
 {
-    floorPrice = 0;
+    stats = null;
 
     metadata.every(function(element, index) {
         element.primary_asset_contracts.every(function(contract, index2) {
             if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
             {
-                floorPrice = element.stats.floor_price;
+                stats = element.stats;
                 return false;
             }
 
@@ -56,8 +56,17 @@ function processData(metadata)
             return true;
     });
 
+    if (stats == null)
+    {
+      const embedMsg = new Discord.MessageEmbed()
+      .setTitle(`Stats couldn't be gathered. Sorry!`);
+
+      message.channel.send(embedMsg);
+      return;
+    }
+
     const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`The current floor price is ${floorPrice}Ξ`);
+          .setTitle(`The current floor price is ${floorPrice}Ξ`)
 
     message.channel.send(embedMsg);
 }
