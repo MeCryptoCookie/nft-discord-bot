@@ -7,9 +7,9 @@ module.exports = {
 	execute(message, args) {
 
   // Otherwise, current date will be used:
-  const phase = lunarPhase;
-  const age = lunarAge;
-  const emoji = lunarPhaseEmoji;
+  const phase = lunarPhase();
+  const age = lunarAge();
+  const emoji = lunarPhaseEmoji();
 
   console.log(phase);
   console.log(age);
