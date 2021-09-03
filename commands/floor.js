@@ -59,7 +59,7 @@ function processData(metadata)
     });
 
     const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`The current floor price is ${floorPrice.trimEnd()}Ξ`)
+          .setTitle(`The current floor price is ${floorPrice}Ξ`)
           .setURL(data.url)
 
     message.channel.send(embedMsg);
