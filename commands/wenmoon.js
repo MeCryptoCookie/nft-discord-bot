@@ -9,7 +9,7 @@ module.exports = {
 
   const start = new Date();
   console.log(start);
-  moonType = getMoonPhase(start.getYear().toString(), start.getMonth().toString(), start.getDay().toString());  
+  moonType = moon_phase(start);  
 
   const embedMsg = new Discord.MessageEmbed()
   .setTitle(`Tonight's a ${moonType}`);
@@ -17,62 +17,34 @@ module.exports = {
   message.channel.send(embedMsg);
 }};
 
-function getMoonPhase(year, month, day)
-{
-    var c = e = jd = b = 0;
+function moon_phase(date) { // ported from http://www.voidware.com/moon_phase.htm
+  var year = date.getYear(),
+      month = date.getMonth(),
+      day = date.getDay();
 
-    if (month < 3) {
-        year--;
-        month += 12;
-    }
+  if (month < 3) {
+      year--;
+      month += 12;
+  }
 
-    ++month;
+  ++month;
 
-    c = 365.25 * year;
+  jd = 365.25 * year + 30.6 * month + day - 694039.09; // jd is total days elapsed
+  jd /= 29.53; // divide by the moon cycle (29.53 days)
+  phase = parseInt(jd, 10); // int(jd) -> phase, take integer part of jd
+  jd -= phase; // subtract integer part to leave fractional part of original jd
+  phase = Math.ceil(jd * 8); // scale fraction from 0-8 and round by adding 0.5
+  phase = phase & 7; // 0 and 8 are the same so turn 8 into 0
 
-    e = 30.6 * month;
-
-    jd = c + e + day - 694039.09; //jd is total days elapsed
-
-    jd /= 29.5305882; //divide by the moon cycle
-
-    b = parseInt(jd); //int(jd) -> b, take integer part of jd
-
-    jd -= b; //subtract integer part to leave fractional part of original jd
-
-    b = Math.round(jd * 8); //scale fraction from 0-8 and round
-
-    if (b >= 8 ) {
-        b = 0; //0 and 8 are the same so turn 8 into 0
-    }
-
-    switch(b) {
-      case 0:
-        return 'New Moon';
-      case 1:
-        return 'Waxing Crescent Moon';
-      case 2:
-        return 'Quarter Moon';
-      case 3:
-        return 'Waxing Gibbous Moon';
-      case 4:
-        return 'Full Moon';
-      case 5:
-        return 'Waning Gibbous Moon';
-      case 6:
-        return 'Last Quarter Moon';
-      case 7:
-        return 'Waning Crescent Moon';
-    }
-
-    // 0 => New Moon
-    // 1 => Waxing Crescent Moon
-    // 2 => Quarter Moon
-    // 3 => Waxing Gibbous Moon
-    // 4 => Full Moon
-    // 5 => Waning Gibbous Moon
-    // 6 => Last Quarter Moon
-    // 7 => Waning Crescent Moon
-    
-    return b;
+  switch (phase) {
+      case 0: phase = "New Moon"; break;
+      case 1: phase = "Waxing Crescent Moon"; break;
+      case 2: phase = "Quarter Moon"; break;
+      case 3: phase = "Waxing Gibbous Moon"; break;
+      case 4: phase = "Full Moon"; break;
+      case 5: phase = "Waning Gibbous Moon"; break;
+      case 6: phase = "Last Quarter Moon";
+      case 7: phase = "Waning Crescent Moon"; break;
+  }
+  return phase;
 }
