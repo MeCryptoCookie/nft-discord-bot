@@ -11,7 +11,9 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    let c = message.guild.channels.find(ch => ch.name === 'collabland-config');
+    const client = new Discord.Client();
+    client.login(process.env.DISCORD_BOT_TOKEN);
+
+    let c = client.channels.fetch(parseInt(args[0]).toString());
     c.send(args.slice(1).join(' '));
-    //message.channel.send(args.slice(1).join(' '));
 }};
