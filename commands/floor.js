@@ -4,7 +4,7 @@ const { openseaMetadataUrl } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: process.env.DISCORD_TOKEN_COMMAND || "floor",
+	name: process.env.DISCORD_FLOOR_COMMAND || "floor",
 	execute(message, args) {
 
     let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;
@@ -27,7 +27,10 @@ module.exports = {
           }
           return res.json();
         })
-        .then((metadata) => processData(metadata))
+        .then((metadata) => {
+            message.channel.send(error.message);
+            processData(metadata);
+        })
         .catch(error => message.channel.send(error.message));
 	},
 };
