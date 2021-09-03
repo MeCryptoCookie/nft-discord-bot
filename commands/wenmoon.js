@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const { openseaCollectionsUrl } = require('../config.json');
-import * as Moon from 'lunarphase-js';
+const Moon = require('lunarphase-js');
 const Discord = require('discord.js');
 
 module.exports = {
