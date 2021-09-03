@@ -1,48 +1,56 @@
-// const Discord = require('discord.js');
-// const axios = require('axios')
-// const jsdom = require('jsdom')
-// const CacheService = require('../cache')
+const fetch = require('node-fetch');
+const { openseaMetadataUrl } = require('../config.json');
 
-// const { JSDOM } = jsdom;
+const Discord = require('discord.js');
 
-// const ttl = 3600; //cache for 3600 seconds;
-// const cache = new CacheService(ttl);
+module.exports = {
+	name: process.env.DISCORD_TOKEN_COMMAND || "floor",
+	execute(message, args) {
 
-// const sleep = async (delay) => await new Promise(r => setTimeout(r, delay))
+    let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;
+    let settings = { 
+      method: "GET",
+      headers: {
+        "X-API-KEY": process.env.OPEN_SEA_API_KEY
+      }
+    };
+    
+    fetch(url, settings)
+        .then(res => {
+          if (res.status == 404 || res.status == 400)
+          {
+            throw new Error("Wallet doesn't exist.");
+          }
+          if (res.status != 200)
+          {
+            throw new Error(`Couldn't retrieve: ${res.statusText}`);
+          }
+          return res.json();
+        })
+        .then((metadata) => processData(metadata))
+        .catch(error => message.channel.send(error.message));
+	},
+};
 
-// const openseaUrl = `https://opensea.io/assets/${process.env.OPEN_SEA_COLLECTION_NAME}?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW`
+function processData(metadata)
+{
+    floorPrice = 0;
 
-// // wait before downloading a page from OpenSea - so that we don't get rate limited
-// const getOS = async url => {
-//   const OS_INTERVAL = 500
-//   await sleep(OS_INTERVAL)
-//   const res = await axios.get(url, {
-//     "headers": { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"},
-//   });
-//   return res.data
-// }
+    foreach(x in metadata)
+    {
+        foreach(y in x.primary_asset_contracts)
+        {
+            if(y.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
+            {
+                floorPrice = x.floor_price;
+                break;
+            }
+        }
+    }
 
-// const fetchFloor = async () => {
-//   const osPage = await getOS(openseaUrl)
-//   const dom = new JSDOM(osPage)
-//   let name = dom.window.document.querySelector('.AssetCardFooter--name').textContent
-//   let price = dom.window.document.querySelector('.Price--amount').textContent
-//   let url = `https://opensea.io${dom.window.document.querySelector('.Asset--anchor').href}`
+    const embedMsg = new Discord.MessageEmbed()
+          .setTitle(`The current floor price is ${floorPrice.trimEnd()}Ξ`)
+          .setURL(data.url)
 
-//   return {name, price, url}
-// }
-
-// module.exports = {
-// 	name: "floor",
-// 	execute(message) {
-//     cache.get("FloorPrice", fetchFloor)
-//       .then((data) => {
-//         const embedMsg = new Discord.MessageEmbed()
-//           .setTitle(`The current floor price is ${data.price.trimEnd()}Ξ`)
-//           .setURL(data.url)
-
-//           message.channel.send(embedMsg);
-//       })
-//       .catch(error => message.channel.send(error.message));
-// 	},
-// };
+    message.channel.send(embedMsg);
+}
