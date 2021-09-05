@@ -4,8 +4,10 @@ module.exports = {
 	name: process.env.DISCORD_RECRUITME_COMMAND || "recruitme",
 	execute(message, args) {
 
-		let role = message.member.guild.roles.cache.find(role => role.name === "PCC Recruit");
+		let role = message.member.guild.roles.cache.find(role => role.name === "PCC Recruits");
 		
+		console.log(role);
+
 		if (role) 
 		{
 			message.guild.members.cache.get(message.author.id).roles.add(role);
