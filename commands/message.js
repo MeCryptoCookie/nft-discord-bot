@@ -1,5 +1,21 @@
 const Discord = require('discord.js');
 
+
+const discordBot = new Discord.Client();
+const  discordSetup = async (channelId) => {
+  return new Promise<TextChannel>((resolve, reject) => {
+    ['DISCORD_BOT_TOKEN', 'DISCORD_CHANNEL_ID'].forEach((envVar) => {
+      if (!process.env[envVar]) reject(`${envVar} not set`)
+    })
+  
+    discordBot.login(process.env.DISCORD_BOT_TOKEN);
+    discordBot.on('ready', async () => {
+      const channel = await discordBot.channels.fetch(channelId);
+      resolve(channel);
+    });
+  })
+}
+
 module.exports = {
 	name: process.env.DISCORD_MESSAGE_COMMAND || "message",
 	execute(message, args) {
@@ -11,9 +27,6 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    const client = new Discord.Client();
-    client.login(process.env.DISCORD_BOT_TOKEN);
-
-    let c = client.channels.cache.get(parseInt(args[0]).toString());
-    c.send(args.slice(1).join(' '));
+    const client = await discortSetup(args[0]);
+    client.send(args.slice(1).join(' '));
 }};
