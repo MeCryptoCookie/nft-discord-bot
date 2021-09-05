@@ -6,8 +6,6 @@ module.exports = {
 
 		let role = message.member.guild.roles.cache.find(role => role.name === "PCC Recruits");
 		
-		console.log(role);
-
 		if (role) 
 		{
 			message.guild.members.cache.get(message.author.id).roles.add(role);
