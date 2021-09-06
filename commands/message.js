@@ -11,14 +11,6 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    const embedMsg = new Discord.MessageEmbed()
-              .setColor('#0099ff')
-              .setTitle('#42069 Some fucker was sold!')
-              .setThumbnail('https://pbs.twimg.com/media/E-R-dWCXMAMvgoD?format=png&name=small');
-	    	    
-	  embedMsg.addField("Sold For", `WHO CARES`, true);
-	  embedMsg.addField("Buyer", `JOIN ME`, true);
-
     const channel = client.channels.cache.get(args[0]);
-    channel.send(embedMsg);
+    channel.send(args.slice(1).join(' '));
 }};
