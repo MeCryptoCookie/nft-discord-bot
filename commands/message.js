@@ -20,5 +20,5 @@ module.exports = {
 	  embedMsg.addField("Buyer", `JOIN ME`, true);
 
     const channel = client.channels.cache.get(args[0]);
-    channel.send(args.slice(1).join(' '));
+    channel.send(embedMsg);
 }};
