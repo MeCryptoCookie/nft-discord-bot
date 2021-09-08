@@ -11,6 +11,13 @@ module.exports = {
       return message.channel.send(`Channel id must be a number!`);
     }
 
-    const channel = client.channels.cache.get(args[0]);
-    channel.send(args.slice(1).join(' '));
+    if(args[1].startsWith("http")) {
+      let url = args[1];      
+      const channel = client.channels.cache.get(args[0]);
+      channel.send(args.slice(2).join(' '), {files:[url]});
+    }
+    else {
+      const channel = client.channels.cache.get(args[0]);
+      channel.send(args.slice(1).join(' '));
+    }
 }};
