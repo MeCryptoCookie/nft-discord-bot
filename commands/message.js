@@ -12,5 +12,5 @@ module.exports = {
     }
 
     const channel = client.channels.cache.get(args[0]);
-    channel.send(args.slice(1).join(' '));
+    channel.send(args.slice(1).join(' ', {files:['https://cdn.discordapp.com/attachments/819504041679126528/885088305631334450/unknown.png']}));
 }};
