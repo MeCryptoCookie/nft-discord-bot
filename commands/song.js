@@ -12,7 +12,7 @@ module.exports = {
 			"Fall Out Boy - Sugar, We're Going Down",
 			"Panic! At The Disco - I Write Sins Not Tragedies",
 			"Paramore - Misery Business",
-			"The Red JUmpsuit Apparatus - Face Down",
+			"The Red Jumpsuit Apparatus - Face Down",
 			"My Chemical Romance - I'm Not Okay (I Promise)",
 			"All-American Rejects - Dirty Little Secret",
 			"Paramore - That's What You Get",
