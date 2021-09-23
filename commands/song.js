@@ -19,7 +19,9 @@ module.exports = {
 			"Yellowcard - Ocean Avenue",
 			"Yellowcard - Only One",
 			"My Chemical Romance - Welcome To The Black Parade",
-			"30 Seconds To Mars - The Kill"
+			"30 Seconds To Mars - The Kill",
+			"Blink 182 - I Miss You",
+			"Linkin Park - Numb"
 		];
 
 		return message.channel.send(`Currently listening to: ${arr[Math.floor(Math.random() * arr.length)]} ${message.author}`);
