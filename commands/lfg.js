@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = {
 	name: process.env.DISCORD_COMMANDS_COMMAND || "lfg",
-	execute(message, args) {
-      return message.channel.send('<a:pet:892672777918758973> <a:pet:892672777918758973> <a:pet:892672777918758973>');
+	execute(message, args, client) {
+		const someEmoji = client.emojis.get("892672777918758973");
+		return message.channel.send(`${someEmoji} ${someEmoji} ${someEmoji}`);
 }};
