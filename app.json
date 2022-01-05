@@ -11,7 +11,11 @@
   "repository": "https://github.com/lucid-eleven/nft-discord-bot",
   "env": {
     "CONTRACT_ADDRESS": {
-      "description": "Ethereum address for the NFT Smart Contract",
+      "description": "Ethereum address for the Pixl Smart Contract",
+      "required": true
+    },
+    "CAR_CONTRACT_ADDRESS": {
+      "description": "Ethereum address for the Car Smart Contract",
       "required": true
     },
     "DISCORD_BOT_TOKEN": {
@@ -32,6 +36,10 @@
     },
     "OPEN_SEA_COLLECTION_NAME": {
       "description": "The collection slug name on OpenSea, get this from the browser when you are viewing a collection.",
+      "required": true
+    },
+    "OPEN_SEA_CAR_COLLECTION_NAME": {
+      "description": "The car collection slug name on OpenSea, get this from the browser when you are viewing a collection.",
       "required": true
     }
   },
