@@ -4,7 +4,7 @@ const { openseaCollectionsUrl } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: process.env.DISCORD_STATS_COMMAND || "stats",
+	name: "carstats",
 	execute(message, args) {
     let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;
     let settings = { 
@@ -39,7 +39,7 @@ function processData(message, metadata)
       
       metadata.every(function(element, index) {
           element.primary_asset_contracts.every(function(contract, index2) {
-              if (contract.address == process.env.CONTRACT_ADDRESS)
+              if (contract.address == process.env.CAR_CONTRACT_ADDRESS)
               {
                   stats = element.stats;
                   return false;
@@ -64,7 +64,7 @@ function processData(message, metadata)
       else 
       {
         const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`📊 Current Pixls Statistics 📊`);
+          .setTitle(`📊 Current PCC Statistics 📊`);
 
         // embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
         embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
