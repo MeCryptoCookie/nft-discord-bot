@@ -35,48 +35,48 @@ module.exports = {
 
 function processData(message, metadata)
 {
-      stats = null;
-      
-      metadata.every(function(element, index) {
-          element.primary_asset_contracts.every(function(contract, index2) {
-              if (contract.address == process.env.CONTRACT_ADDRESS)
-              {
-                  stats = element.stats;
-                  return false;
-              }
-
-              return true;
-          })
-
-          if(stats != null)
+  stats = null;
+  
+  metadata.every(function(element, index) {
+      element.primary_asset_contracts.every(function(contract, index2) {
+          if (contract.address == "0x082903f4e94c5e10A2B116a4284940a36AFAEd63")
+          {
+              stats = element.stats;
               return false;
-          else
-              return true;
-      });
+          }
 
-      if (stats == null)
-      {
-        const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`Stats couldn't be gathered. Sorry!`);
+          return true;
+      })
 
-        message.channel.send(embedMsg);
-      }
-      else 
-      {
-        const embedMsg = new Discord.MessageEmbed()
-          .setTitle(`📊 Current Pixls Statistics 📊`);
+      if(stats != null)
+          return false;
+      else
+          return true;
+  });
 
-        // embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
-        embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
-        embedMsg.addField("# Owners", `${stats.num_owners}`, false);
-    
-        embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
-        embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
-        embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
-        embedMsg.addField("1D VOL", `${stats.one_day_volume.toFixed(2)}Ξ`, true);
-        embedMsg.addField("7D VOL", `${stats.seven_day_volume.toFixed(2)}Ξ`, true);
-        embedMsg.addField("30D VOL", `${stats.thirty_day_volume.toFixed(2)}Ξ`, true);
+  if (stats == null)
+  {
+    const embedMsg = new Discord.MessageEmbed()
+      .setTitle(`Stats couldn't be gathered. Sorry!`);
 
-        message.channel.send(embedMsg);
-      }
+    message.channel.send(embedMsg);
+  }
+  else 
+  {
+    const embedMsg = new Discord.MessageEmbed()
+      .setTitle(`📊 Current Pixls Statistics 📊`);
+
+    // embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
+    embedMsg.addField("# Owners", `${stats.num_owners}`, false);
+
+    embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
+    embedMsg.addField("1D VOL", `${stats.one_day_volume.toFixed(2)}Ξ`, true);
+    embedMsg.addField("7D VOL", `${stats.seven_day_volume.toFixed(2)}Ξ`, true);
+    embedMsg.addField("30D VOL", `${stats.thirty_day_volume.toFixed(2)}Ξ`, true);
+
+    message.channel.send(embedMsg);
+  }
 }
