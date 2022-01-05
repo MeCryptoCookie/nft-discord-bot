@@ -6,7 +6,6 @@ const Discord = require('discord.js');
 module.exports = {
 	name: process.env.DISCORD_STATS_COMMAND || "stats",
 	execute(message, args) {
-
     let url = `${openseaCollectionsUrl}?asset_owner=${process.env.OWNER_ADDRESS}&offset=0&limit=300`;
     let settings = { 
       method: "GET",
@@ -36,47 +35,51 @@ module.exports = {
 
 function processData(message, metadata)
 {
-    stats = null;
+    let contracts = [{"name":"Pixls", "contract":process.env.CONTRACT_ADDRESS}, {"name":"PCC", "contract":process.env.CAR_CONTRACT_ADDRESS }];
 
-    metadata.every(function(element, index) {
-        element.primary_asset_contracts.every(function(contract, index2) {
-            if (contract.address == "0x082903f4e94c5e10a2b116a4284940a36afaed63")
-            {
-                stats = element.stats;
-                return false;
-            }
+    contracts.forEach(function(c) {
+      stats = null;
+      
+      metadata.every(function(element, index) {
+          element.primary_asset_contracts.every(function(contract, index2) {
+              if (contract.address == c.contract)
+              {
+                  stats = element.stats;
+                  return false;
+              }
 
-            return true;
-        })
+              return true;
+          })
 
-        if(stats != null)
-            return false;
-        else
-            return true;
+          if(stats != null)
+              return false;
+          else
+              return true;
+      });
+
+      if (stats == null)
+      {
+        const embedMsg = new Discord.MessageEmbed()
+        .setTitle(`Stats couldn't be gathered. Sorry!`);
+
+        message.channel.send(embedMsg);
+      }
+      else 
+      {
+        const embedMsg = new Discord.MessageEmbed()
+              .setTitle(`📊 Current ${c.name} Statistics 📊`);
+
+        // embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
+        embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
+        embedMsg.addField("# Owners", `${stats.num_owners}`, true);
+        embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
+        embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
+        embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
+        embedMsg.addField("1D VOL", `${stats.one_day_volume.toFixed(2)}Ξ`, true);
+        embedMsg.addField("7D VOL", `${stats.seven_day_volume.toFixed(2)}Ξ`, true);
+        embedMsg.addField("30D VOL", `${stats.thirty_day_volume.toFixed(2)}Ξ`, true);
+
+        message.channel.send(embedMsg);
+      }
     });
-
-    if (stats == null)
-    {
-      const embedMsg = new Discord.MessageEmbed()
-      .setTitle(`Stats couldn't be gathered. Sorry!`);
-
-      message.channel.send(embedMsg);
-    }
-    else 
-    {
-      const embedMsg = new Discord.MessageEmbed()
-            .setTitle(`📊 Current Pixls Statistics 📊`);
-
-      embedMsg.addField("Floor", `${stats.floor_price.toFixed(2)}Ξ`, true);
-      embedMsg.addField("Total # Sales", `${stats.total_sales}`, true);
-      embedMsg.addField("# Owners", `${stats.num_owners}`, true);
-      embedMsg.addField("1D AVG", `${stats.one_day_average_price.toFixed(2)}Ξ`, true);
-      embedMsg.addField("7D AVG", `${stats.seven_day_average_price.toFixed(2)}Ξ`, true);
-      embedMsg.addField("30D AVG", `${stats.thirty_day_average_price.toFixed(2)}Ξ`, true);
-      embedMsg.addField("1D VOL", `${stats.one_day_volume.toFixed(2)}Ξ`, true);
-      embedMsg.addField("7D VOL", `${stats.seven_day_volume.toFixed(2)}Ξ`, true);
-      embedMsg.addField("30D VOL", `${stats.thirty_day_volume.toFixed(2)}Ξ`, true);
-
-      message.channel.send(embedMsg);
-    }
 }

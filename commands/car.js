@@ -37,7 +37,7 @@ module.exports = {
         .then((metadata) => {
             const embedMsg = new Discord.MessageEmbed()
               .setColor('#0099ff')
-              .setTitle(metadata.name)
+              .setTitle("Car " + metadata.name)
               .setURL(metadata.permalink)
               .setThumbnail(metadata.image_url);
 	    	    
