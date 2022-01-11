@@ -2,9 +2,9 @@
 const Discord = require('discord.js');
 
 module.exports = {
-		name: "gm",
+		name: "ga",
 		execute(message, args, client) {
-			const someEmoji = client.emojis.cache.find(emoji => emoji.name === "gm");
+			const someEmoji = client.emojis.cache.find(emoji => emoji.name === "ga");
 			return message.channel.send(`${someEmoji}`);
 	}
 };
