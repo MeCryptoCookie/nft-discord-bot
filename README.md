@@ -1,14 +1,15 @@
 # NFT Discord Bot
-This is a discord bot for ERC721 NFT collections, all the token metadata is being retrieved from opensea at the moment, instead of directly from the tokenURI in the smart contract.
+This is a discord bot for ERC721 NFT collections, all the token metadata is being retrieved from OpenSea at the moment, instead of directly from the tokenURI in the smart contract.
 
 # Supported functions
 The following functions are currently supported:
 
 ## User Commands
-### **!*TOKEN_COMMAND*** *[tokenId]*
-Retrieves the NFT based on the supplied tokenId, returns an embed message as follows. The actual *TOKEN_COMMAND* can be any keyword you like and is configurable via environment variables as described below.
+### **!pixl** *[tokenId]*
+Retrieves the Pixlton NFT based on the supplied tokenId, returns an embed message with rarity data.
 
-![token command example screenshot](https://i.imgur.com/oTwvrnC.png)
+### **!car** *[tokenId]*
+Retrieves the Pixlton Car Club NFT based on the supplied tokenId, returns an embed message with rarity data.
 
 # Configuration
 
