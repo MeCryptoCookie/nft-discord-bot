@@ -12,7 +12,7 @@ module.exports = {
 	  '!lfg - LFG!!!!1!\n' + 
 	  '!bok - Bok boooook!\n' + 
 	  '!cluck - Cluck-cluuuck!\n' + 
-	  '!rank - Fancy roles, but what are the rules?\n' + 
+	  '!flair - Fancy flair, but what are the rules?\n' + 
 	  '!nftx - Let me tell you how that works.\n' + 
 	  '!rarity - Learn more about rarities.```');
 }};
