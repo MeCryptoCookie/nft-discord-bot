@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: "rank",
+	name: "flair",
 	execute(message, args) {
 		message.suppressEmbeds(true);
 		return message.channel.send('So you want to make it big chump!? Here\'s how:\n' + 
