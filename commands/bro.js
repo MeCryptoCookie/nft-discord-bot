@@ -8,6 +8,7 @@ module.exports = {
       	return message.channel.send('Bro!');
 	  }
 	  else {
-		return message.channel.send(`${args[0]} bro!`);
+		
+		return message.channel.send(`${args.join(' ')} bro!`);
 	  }
 }};
