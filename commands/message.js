@@ -3,6 +3,12 @@ const Discord = require('discord.js');
 module.exports = {
 	name: process.env.DISCORD_MESSAGE_COMMAND || "message",
 	execute(message, args, client) {
+
+    if(!message.member.hasPermission("BAN_MEMBERS"))
+    {
+      return message.channel.send('Nah bro!');
+    }
+
     if (!args.length) {
       return message.channel.send(`You didn't provide a channel ID or message, ${message.author}!`);
     }
