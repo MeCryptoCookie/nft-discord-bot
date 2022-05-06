@@ -24,6 +24,6 @@ module.exports = {
 			"Linkin Park - Numb"
 		];
 
-		return message.channel.send(`Currently listening to: ${arr[Math.floor(Math.random() * arr.length)]} ${message.author}`);
+		return message.channel.send('I quit listening to music bro. World domination takes up all my time.'); //`Currently listening to: ${arr[Math.floor(Math.random() * arr.length)]} ${message.author}`);
 	}
 };
